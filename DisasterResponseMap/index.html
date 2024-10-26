@@ -4,20 +4,51 @@
     <meta charset="UTF-8">
     <title>AidLink</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Load mapbox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />   
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' /> 
+
+     <!-- Load the `mapbox-gl-geocoder` plugin. -->
+     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+       
     <style>
         body {
             margin: 0;
         }
-        #map{
+        #map {
             height: 100vh;
             width: 100vw;
+        }
+        #menu {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.8); /* semi-transparent background */
+        padding: 8px;
+        border-radius: 4px;
+        font-family: 'Open Sans', sans-serif;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        max-width: 150px; /* to avoid scroll bars */
+        overflow: hidden;
+        z-index: 1;
         }
     </style>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div id='map'></div>
+    <div id="menu">
+        <input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
+        <label for="streets-v12">Streets</label>
+        <input id="light-v11" type="radio" name="rtoggle" value="light">
+        <label for="light-v11">Light</label>
+        <input id="dark-v11" type="radio" name="rtoggle" value="dark">
+        <label for="dark-v11">Dark</label>
+        <input id="satellite-streets-v12" type="radio" name="rtoggle" value="satellite">
+        <label for="satellite-v12">Satellite</label>
+        <input id="outdoors-v12" type="radio" name="rtoggle" value="outdoors">
+        <label for="outdoors-v12">Outdoors</label>
+    </div>
 </body>
 </html>

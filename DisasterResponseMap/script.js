@@ -16,7 +16,7 @@ function errorLocation(position) {
 function setupMap(center) {
     const map = new mapboxgl.Map({
         container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        style: 'mapbox://styles/mapbox/streets-v12', // default style
         center: center, // starting position
         zoom: 16 // starting zoom
     });
@@ -35,4 +35,23 @@ function setupMap(center) {
             showUserHeading: true
         })
     );
+    
+    // Geocoder
+    map.addControl(
+        new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        })
+    );
+
+    // Style change functionality
+    const layerList = document.getElementById('menu');
+    const inputs = layerList.getElementsByTagName('input');
+
+    for (const input of inputs) {
+        input.onclick = (layer) => {
+            const layerId = layer.target.id;
+            map.setStyle('mapbox://styles/mapbox/' + layerId);
+        };
+    }
 }
