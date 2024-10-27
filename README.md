@@ -1,8 +1,12 @@
-## Install Guide
+## Install Guide (You will need Firebase to run the website)
+### 1. Install Dependencies
 Download and unzip
-Run in PyCharm to install dependancies
-Hopefully It'll run :D
+Run install_dependencies.py
 
+### Firebase Configuration
+Go to Firebase Console
+Generate a private key, download the JSON
+Input JSON path in line 11 of main.py (cred_path = os.path.join(os.path.dirname(__file__), 'your-firebase-credentials.json', replace "your-firebase-credentials.json" with file name and file path.
 
 ## Inspiration
 Coming from Indonesia, (a tropical country located right on the Ring of Fire,) we're not strangers to natural disasters of all kinds, be it floods, earthquakes, tsunamis, or even volcanic eruptions. We've experienced firsthand how chaotic and disorganized rescue efforts can be in crises situations, which will become even more frequent due to the presence of climate change. So, we thought up AidLink as a community-based approach to disaster mitigation.
