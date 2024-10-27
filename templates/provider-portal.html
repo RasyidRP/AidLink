@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AidLink</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+        --primary: #2563eb;
+        --secondary: #3b82f6;
+        --accent: #60a5fa;
+        --background: #f8fafc;
+        --text: #1e293b;
+        --danger: #ef4444;
+        --success: #22c55e;
+        --gray-light: #f3f4f6;
+        --gray: #9ca3af;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+        background-color: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1.5rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .main-content {
+        padding: 2rem 0;
+    }
+
+    .page-title {
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+        color: var(--gray);
+        margin-bottom: 2rem;
+    }
+
+    .user-type-selection {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .user-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+    }
+
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+    }
+
+    .user-card h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .features-list {
+        list-style: none;
+        margin-top: 1rem;
+    }
+
+    .features-list li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .features-list i {
+        color: var(--success);
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        background-color: var(--primary);
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 1rem;
+    }
+
+    .btn:hover {
+        background-color: var(--secondary);
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+    }
+
+    .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    .emergency-button {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: var(--danger);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        animation: pulse 2s infinite;
+        text-decoration: none;
+    }
+
+    /* Dashboard Styles */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .dashboard-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .dashboard-card h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .resource-map {
+        background: var(--gray-light);
+        border-radius: 0.5rem;
+        height: 400px;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray);
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+        .header-content {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .nav-links {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .emergency-button {
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.9rem;
+        }
+    }
+        /* Find Amenity Form Styles */
+        .find-amenity-form {
+            display: flex;
+            flex-direction: column; /* Stack the inputs vertically */
+        }
+
+        .features-list {
+            list-style: none; /* Remove default list styling */
+            padding: 0; /* Remove padding */
+            margin: 0 0 1rem; /* Add margin below the list */
+        }
+
+        .features-list li {
+            margin-bottom: 1rem; /* Space between items */
+        }
+
+        label {
+            display: block; /* Make labels block-level */
+            margin-bottom: 0.5rem; /* Space between label and input */
+            font-weight: bold; /* Bold labels */
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%; /* Full width */
+            padding: 0.5rem; /* Padding inside inputs */
+            border: 1px solid var(--gray); /* Border styling */
+            border-radius: 0.25rem; /* Rounded corners */
+            font-size: 1rem; /* Font size */
+            transition: border-color 0.3s; /* Smooth transition for border color */
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            border-color: var(--primary); /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* Padding for button */
+            border-radius: 0.5rem; /* Rounded corners */
+            background-color: var(--primary); /* Primary background color */
+            color: white; /* Text color */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer cursor */
+            font-weight: 500; /* Font weight */
+            margin-top: 1rem; /* Space above button */
+        }
+
+        .btn:hover {
+            background-color: var(--secondary); /* Change color on hover */
+        }
+
+        /* Additional responsive adjustments if necessary */
+        @media (max-width: 768px) {
+            .features-list li {
+                flex-direction: column; /* Stack inputs on smaller screens */
+            }
+
+            input[type="text"], select {
+                font-size: 0.9rem; /* Smaller font on mobile */
+            }
+
+            .btn {
+                padding: 0.5rem 1rem; /* Adjust button padding */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAXkYdOoTEgTrDIUKtvjKtA_3TSGi1-f7s",
+            authDomain: "aidlink17.firebaseapp.com",
+            databaseURL: "https://aidlink17-default-rtdb.firebaseio.com",
+            projectId: "aidlink17",
+            storageBucket: "aidlink17.appspot.com",
+            messagingSenderId: "743211380627",
+            appId: "1:743211380627:web:3d5d7606aba1804575c266"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.getAuth();
+
+        // Check user authentication status
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                // User is not signed in, redirect to provider login page
+                window.location.href = "provider-login.html";
+            }
+        });
+    </script>
+    <header>
+        <div class="container header-content">
+        <a href="home.html" class="logo">
+            <i class="fas fa-hands-helping"></i> AidLink
+        </a>
+        <nav class="nav-links">
+            <a href="javascript:void(0);" onclick="window.location.href='/home';">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="javascript:void(0);" onclick="window.location.href='/about';">
+                <i class="fas fa-info-circle"></i> About
+            </a>
+            <a href="javascript:void(0);" onclick="window.location.href='/contact';">
+                <i class="fas fa-phone"></i> Meet Our Team
+            </a>
+            <a href="javascript:void(0);" onclick="window.location.href='/logout';">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </nav>
+    </div>
+    </header>
+
+    <main class="main-content container">
+        <h1 class="page-title">Aid Provider Dashboard</h1>
+        <p class="subtitle">Manage and coordinate aid distribution effectively.</p>
+
+        <div class="dashboard-grid">
+            <!-- Inventory Status -->
+            <div class="dashboard-card">
+                <h3><i class="fas fa-boxes"></i> Inventory Status</h3>
+                <ul class="features-list">
+                    <li><i class="fas fa-water"></i> Water: <span id="water-inventory">Loading...</span> units</li>
+                    <li><i class="fas fa-bread-slice"></i> Food: <span id="food-inventory">Loading...</span> packages</li>
+                    <li><i class="fas fa-first-aid"></i> Medical: <span id="medical-inventory">Loading...</span> kits</li>
+                    <li><i class="fas fa-house"></i> Shelter: <span id="shelter-inventory">Loading...</span> tents</li>
+                </ul>
+                <a href="#" id="update-inventory" class="btn">Update Inventory</a>
+            </div>
+
+            <!-- Active Requests -->
+            <div class="dashboard-card">
+                <h3><i class="fas fa-hands-helping"></i> Add Amenities</h3>
+                <form method="POST" action="/aid_providers" class="amenity-form"> <!-- Single class for styling -->
+                    <div class="form-group">
+                        <label for="amenity_type">Amenity Type:</label>
+                        <select name="amenity_type" id="amenity_type" required>
+                            <option value="">Select an amenity type</option>
+                            <option value="shelters">Shelter</option>
+                            <option value="foodbanks">Food Bank</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" required placeholder="Enter amenity name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lat">Latitude:</label>
+                        <input type="text" name="lat" id="lat" required placeholder="Enter latitude">
+                    </div>
+                    <div class="form-group">
+                        <label for="lon">Longitude:</label>
+                        <input type="text" name="lon" id="lon" required placeholder="Enter longitude">
+                    </div>
+                    <button type="submit" class="btn">Add Amenities</button>
+                </form>
+
+                <div id="map">
+                    {% if map_html %}
+                        {{ map_html | safe }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <style>
+            .amenity-form {
+                background: var(--gray-light); /* Light gray background for the form */
+                padding: 1.5rem; /* Padding around the form */
+                border-radius: 0.5rem; /* Rounded corners */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                margin-top: 1rem; /* Margin above the form */
+            }
+
+            .form-group {
+                margin-bottom: 1rem; /* Space between form groups */
+            }
+
+            .form-group label {
+                display: block; /* Block display for labels */
+                margin-bottom: 0.5rem; /* Space below labels */
+                font-weight: bold; /* Bold labels for emphasis */
+            }
+
+            .form-group select,
+            .form-group input {
+                width: 100%; /* Full width for inputs and selects */
+                padding: 0.5rem; /* Padding inside inputs */
+                border: 1px solid var(--gray); /* Border color */
+                border-radius: 0.25rem; /* Rounded corners */
+                font-size: 1rem; /* Font size */
+            }
+
+            .form-group input:focus,
+            .form-group select:focus {
+                border-color: var(--primary); /* Primary color on focus */
+                outline: none; /* Remove default outline */
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Shadow effect on focus */
+            }
+
+            .btn {
+                background: var(--primary); /* Primary button color */
+                color: white; /* White text color */
+                padding: 0.5rem 1rem; /* Button padding */
+                border: none; /* No border */
+                border-radius: 0.25rem; /* Rounded corners */
+                cursor: pointer; /* Pointer cursor on hover */
+                transition: background 0.3s; /* Transition for background change */
+            }
+
+            .btn:hover {
+                background: #1e4bbf; /* Darker shade for hover (adjust as needed) */
+            }
+ </style>
+
+
+
+
+            <!-- Volunteer Coordination -->
+            <div class="dashboard-card">
+                <h3><i class="fas fa-people-carry"></i> Volunteer Coordination</h3>
+                <p>Manage volunteer teams and assign distribution tasks.</p>
+                <a href="#" id="manage-volunteers" class="btn">Manage Volunteers</a>
+            </div>
+        </div>
+
+        <!-- Map for Distribution Locations -->
+        <div class="resource-map">
+            <p><i class="fas fa-map-marker-alt"></i> Interactive Resource Map (Coming Soon)</p>
+        </div>
+    </main>
+
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    
+    <script>
+        // Check if the user is authorized to access the provider portal
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                const allowedProviders = ['provider1@example.com', 'provider2@example.com'];
+                if (allowedProviders.includes(user.email)) {
+                    console.log('Access granted to provider portal');
+                    loadInventory();
+                    loadRequests();
+                } else {
+                    console.log('Access denied');
+                    window.location.href = 'index.html'; // Redirect to home if not allowed
+                }
+            } else {
+                window.location.href = 'login.html'; // Redirect to login if not authenticated
+            }
+        });
+
+        // Log out functionality
+        const logoutButton = document.querySelector('#logout');
+        logoutButton.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html'; // Redirect to login page
+            });
+        });
+
+        // Load Inventory Data from Firebase
+        function loadInventory() {
+            db.collection('inventory').doc('current').get().then((doc) => {
+                if (doc.exists) {
+                    document.getElementById('water-inventory').textContent = doc.data().water;
+                    document.getElementById('food-inventory').textContent = doc.data().food;
+                    document.getElementById('medical-inventory').textContent = doc.data().medical;
+                    document.getElementById('shelter-inventory').textContent = doc.data().shelter;
+                } else {
+                    console.log('No inventory data found!');
+                }
+            }).catch((error) => {
+                console.error('Error fetching inventory:', error);
+            });
+        }
+
+        // Load Requests Data from Firebase
+        function loadRequests() {
+            db.collection('requests').get().then((snapshot) => {
+                let pending = 0, inTransit = 0, completed = 0;
+
+                snapshot.forEach(doc => {
+                    const request = doc.data();
+                    if (request.status === 'pending') pending++;
+                    else if (request.status === 'in_transit') inTransit++;
+                    else if (request.status === 'completed') completed++;
+                });
+
+                document.getElementById('pending-requests').textContent = pending;
+                document.getElementById('in-transit-requests').textContent = inTransit;
+                document.getElementById('completed-requests').textContent = completed;
+            }).catch((error) => {
+                console.error('Error fetching requests:', error);
+            });
+        }
+    </script>
+</body>
+</html>

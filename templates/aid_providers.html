@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aid Provider Assistance</title>
+</head>
+<body>
+    <h1>Aid Provider Assistance</h1>
+    <form method="POST" action="/aid_providers">
+            <br>
+            <label for="amenity_type">Amenity Type:</label>
+            <select name="amenity_type" id="amenity_type" required>
+                <option value="">Select an amenity type</option>
+                <option value="shelters">Shelter</option>
+                <option value="foodbanks">Food Bank</option>
+            </select>
+            <br>
+
+            <br>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+
+            <br>
+            <label for="lat">Latitude:</label>
+            <input type="text" name="lat" id="lat" required>
+            <label for="lon">Longitude:</label>
+            <input type="text" name="lon" id="lon" required>
+            <br>
+
+            <button type="submit">Add Amenities</button>
+        </form>
+
+        <div id="map">
+        {% if map_html %}
+            {{ map_html | safe }}
+        {% endif %}
+    </div>
+</body>
+</html>
